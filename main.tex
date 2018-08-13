@@ -1,0 +1,185 @@
+% -*- Mode:TeX -*-
+
+%% IMPORTANT: The official thesis specifications are available at:
+%%            http://libraries.mit.edu/archives/thesis-specs/
+%%
+%%            Please verify your thesis' formatting and copyright
+%%            assignment before submission.  If you notice any
+%%            discrepancies between these templates and the 
+%%            MIT Libraries' specs, please let us know
+%%            by e-mailing thesis@mit.edu
+
+%% The documentclass options along with the pagestyle can be used to generate
+%% a technical report, a draft copy, or a regular thesis.  You may need to
+%% re-specify the pagestyle after you \include  cover.tex.  For more
+%% information, see the first few lines of mitthesis.cls. 
+
+%\documentclass[12pt,vi,twoside]{mitthesis}
+%%
+%%  If you want your thesis copyright to you instead of MIT, use the
+%%  ``vi'' option, as above.
+%%
+%\documentclass[12pt,twoside,leftblank]{mitthesis}
+%%
+%% If you want blank pages before new chapters to be labelled ``This
+%% Page Intentionally Left Blank'', use the ``leftblank'' option, as
+%% above. 
+\documentclass[11pt,twoside]{mitthesis}
+\usepackage{lgrind}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[usestackEOL]{stackengine}
+\usepackage{fixltx2e}
+\usepackage{longtable}
+\usepackage{xspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage{ textcomp }
+%  colorlinks=false,% hyperlinks will be coloured
+ % linkcolor=black,% hyperlink text will be green
+  %linkbordercolor=white,% hyperlink border will be red
+  %citecolor=black, 
+  %citebordercolor=white
+
+\usepackage{slantsc}
+%\usepackage[capitalise,noabbrev]{cleveref}
+%\usepackage[capitalise]{cleveref}
+
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\scshape\filcenter}{\chaptertitlename\ \thechapter}{20pt}{\LARGE}
+\titlespacing*{\chapter}
+  {0pt}{30pt}{20pt}
+
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries}
+
+\usepackage{enumitem}
+\usepackage{pgfplotstable,filecontents}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{ccaption}% http://ctan.org/pkg/ccaption
+\usepackage{makecell}
+\usepackage{comment}
+%% These have been added at the request of the MIT Libraries, because
+%% some PDF conversions mess up the ligatures.  -LB, 1/22/2014
+\usepackage{cmap}
+\usepackage{makecell}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\pagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Generate symbols (like \degree)
+\usepackage{gensymb}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tyler's Packages
+%%%% Load Packages
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{gensymb}
+\usepackage[margin=3cm,noheadfoot]{geometry}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{lscape}
+\usepackage{comment}
+% Include adjustwidth 
+\usepackage{changepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography packages
+
+% Danielles:
+%\usepackage[authoryear,round,semicolon]{natbib}
+
+% Tyler's
+\usepackage[backend=biber, style=authoryear, citestyle=authoryear-comp,maxcitenames=2,maxbibnames=6,uniquename=false,uniquelist=false]{biblatex}
+\addbibresource{My Library.bib}
+\newrobustcmd*{\parentexttrack}[1]{%
+  \begingroup
+  \blx@blxinit
+  \blx@setsfcodes
+  \blx@bibopenparen#1\blx@bibcloseparen
+  \endgroup}
+\AtEveryCite{%
+  \let\parentext=\parentexttrack%
+  \let\bibopenparen=\bibopenbracket%
+  \let\bibcloseparen=\bibclosebracket}
+\makeatother
+% Italicize names in citation 
+% Renew formatting of the last name to add emphasis
+\renewcommand{\mkbibnamefamily}[1]{\mkbibemph{#1}}
+% Revert formatting of the last name for bibliography
+\AtBeginBibliography{\renewcommand{\mkbibnamefamily}[1]{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx, pdflscape}
+\usepackage[font={small}, labelfont=bf, labelsep=colon]{caption}
+%\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+%\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+
+\newlist{DS2}{enumerate}{1}
+\setlist[DS2]{label=Data Sheet 2-\arabic*}
+\newlist{DS3}{enumerate}{1}
+\setlist[DS3]{label=Data Sheet 3-\arabic*}
+\newlist{DS5}{enumerate}{1}
+\setlist[DS5]{label=Data Sheet 5-\arabic*}
+\pgfplotsset{compat=1.15}
+
+% so we can use rules for table like \toprule
+\usepackage{booktabs}
+
+% so our long table can wrap pages
+%\usepackage{longtable}
+
+%\typein [\files]{Enter file names to process, (chap1,chap2 %...), or `all' to
+%process all files:}
+%\def\all{all}
+%\ifx\files\all \typeout{Including all files.} \else %\typeout{Including only \files.} \includeonly{\files} \fi
+
+% some new column types from: https://tex.stackexchange.com/questions/12703/how-to-create-fixed-width-table-columns-with-text-raggedright-centered-raggedlef
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%% Figures @ End of Whole Document
+    % Dont want this
+%\usepackage[nomarkers]{endfloat} 
+%\usepackage[export]{adjustbox}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % Begin Document %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\include{cover}
+\pagestyle{plain}
+\include{contents}
+\include{chap1}
+\include{chap2}
+\include{chap3}
+\include{chap4}
+\include{chap5}
+\include{chap6}
+\appendix
+\include{appA}
+%\include{app_hydrates}
+%\include{app_aom}
+%\include{app_methylotrophic}
+%\include{app_chitinase}
+%\include{appE}
+
+\include{biblio}
+\end{document}
+
